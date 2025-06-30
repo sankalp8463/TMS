@@ -1,0 +1,55 @@
+.course-card {
+  border: none;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  background: #f8faff;
+}
+.course-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(0, 123, 255, 0.15);
+  transform: translateY(-4px) scale(1.02);
+  background: #e9f2fb;
+}
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.card-title {
+  font-weight: 600;
+  color: #007bff !important;
+}
+.custom-modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 34, 68, 0.6);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.custom-modal {
+  background: #fff;
+  border-radius: 1.2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 32px 0 rgba(0, 123, 255, 0.25);
+  animation: fadeIn 0.2s;
+}
+.custom-modal-header {
+  border-top-left-radius: 1.2rem;
+  border-top-right-radius: 1.2rem;
+  padding: 1rem 1.5rem;
+}
+.custom-modal-body {
+  padding: 1.5rem;
+}
+.btn-close-white {
+  filter: invert(1);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}

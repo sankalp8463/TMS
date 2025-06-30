@@ -1,0 +1,25 @@
+.profile-pop {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 320px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 16px rgba(0,0,0,0.15);
+  z-index: 1050;
+  transition: right 0.3s cubic-bezier(.4,0,.2,1);
+  padding: 24px 20px;
+}
+.profile-pop.open {
+  right: 0;
+}
+.profile-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+.profile-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.2);
+  z-index: 1049;
+}

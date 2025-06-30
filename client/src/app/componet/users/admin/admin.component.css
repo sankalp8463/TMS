@@ -1,0 +1,76 @@
+.admin-panel-bg {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+.list-group-item {
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.bg-white, .bg-light {
+  background: #fff !important;
+}
+
+.admin-table th, .admin-table td {
+  background: #f8f9fa;
+  color: #222;
+  vertical-align: middle;
+}
+
+.admin-table thead {
+  background: #007bff;
+  color: #fff;
+}
+
+.admin-table tr:hover {
+  background: #e3f0ff;
+}
+
+.btn-primary {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+
+input.form-control, select.form-control {
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .admin-panel-bg {
+    padding: 1rem !important;
+  }
+  .admin-table {
+    font-size: 0.95rem;
+  }
+}

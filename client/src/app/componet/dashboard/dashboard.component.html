@@ -1,0 +1,6 @@
+<ng-container *ngIf="userRole === 'admin'; else userPanel">
+<app-admin></app-admin>
+</ng-container>
+<ng-template #userPanel>
+<app-user></app-user>
+</ng-template>

@@ -1,0 +1,61 @@
+<div>
+  <h5 class="mb-3 text-primary">Manage Study Material</h5>
+  <form (ngSubmit)="addOrUpdateMaterial()" class="row g-3 mb-4 align-items-end">
+    <div class="col-md-3">
+      <select class="form-select" [(ngModel)]="newMaterial.courseId" name="courseId" (change)="loadMaterials()" required>
+        <option value="" disabled selected>Select Course</option>
+        <option *ngFor="let c of courses" [value]="c._id">{{ c.name }}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <input type="text" class="form-control" placeholder="Topic Name" [(ngModel)]="newMaterial.topicName" name="topicName" required>
+    </div>
+    <div class="col-md-3">
+      <input type="text" class="form-control" placeholder="Description" [(ngModel)]="newMaterial.description" name="description">
+    </div>
+    <div class="col-md-3">
+      <input type="file" class="form-control" (change)="onFileChange($event)">
+    </div>
+    <div class="col-12">
+      <textarea class="form-control" placeholder="Text Content" [(ngModel)]="newMaterial.textContent" name="textContent" rows="2"></textarea>
+    </div>
+    <div class="col-12 d-flex gap-2">
+      <button type="submit" class="btn btn-primary">{{ editMode ? 'Update' : 'Add' }}</button>
+      <button *ngIf="editMode" type="button" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+    </div>
+  </form>
+  <div *ngIf="message" class="alert alert-success py-2">{{ message }}</div>
+  <table class="table table-bordered table-hover shadow-sm align-middle">
+    <thead class="table-primary">
+      <tr>
+        <th>Topic</th>
+        <th>Description</th>
+        <th>Text Content</th>
+        <th>File</th>
+        <th style="width:120px;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mat of materials">
+        <td>{{ mat.topicName }}</td>
+        <td>{{ mat.description }}</td>
+        <td>{{ mat.textContent }}</td>
+       <td>
+  <!-- Show image preview if file is an image -->
+  <a *ngIf="mat.fileBase64 && mat.fileType?.startsWith('image')" [href]="mat.fileBase64" target="_blank">
+    <img [src]="mat.fileBase64" alt="file" width="40" height="40" class="rounded shadow-sm">
+  </a>
+  <!-- Show PDF icon and download link if file is a PDF -->
+<a *ngIf="mat.fileBase64 && mat.fileType?.includes('pdf')" [href]="mat.fileBase64" [download]="mat.fileName">
+  <i class="bi bi-file-earmark-pdf text-danger fs-3"></i>
+  <span class="ms-1">{{ mat.fileName || 'PDF' }}</span>
+</a>
+</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-2" (click)="editMaterial(mat)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteMaterial(mat._id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

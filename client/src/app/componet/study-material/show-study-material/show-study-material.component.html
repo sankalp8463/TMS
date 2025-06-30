@@ -1,0 +1,32 @@
+<div class="container py-4">
+  <div class="mb-4">
+    <h3 class="fw-bold text-primary mb-1">
+      {{ materials[0]?.courseName || 'Course' }}
+    </h3>
+    <div class="text-secondary fs-5">Study Materials</div>
+    <hr class="mb-0" style="border-top:2px solid #0d6efd; width:120px;">
+  </div>
+  <div *ngIf="materials.length === 0" class="alert alert-info mt-4">No study materials found for this course.</div>
+  <div class="row g-4">
+    <div class="col-md-6" *ngFor="let mat of materials">
+      <div class="card shadow-sm h-100 border-0" style="background:#f8faff;">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ mat.topicName }}</h5>
+          <p class="card-text text-secondary">{{ mat.description }}</p>
+          <div *ngIf="mat.fileBase64 && mat.fileType?.startsWith('image')" class="mb-2">
+            <img [src]="mat.fileBase64" alt="file" class="img-fluid rounded shadow" style="max-height:180px;">
+          </div>
+          <div *ngIf="mat.fileBase64 && mat.fileType?.includes('pdf')" class="mb-2">
+            <a [href]="mat.fileBase64" target="_blank" [download]="mat.fileName" class="btn btn-outline-danger">
+              <i class="bi bi-file-earmark-pdf"></i> View PDF
+            </a>
+          </div>
+          <div *ngIf="mat.textContent" class="mt-2">
+            <strong class="text-dark">Content:</strong>
+            <div class="border rounded p-2 bg-light text-dark">{{ mat.textContent }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

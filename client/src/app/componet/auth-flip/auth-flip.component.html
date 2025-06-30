@@ -1,0 +1,64 @@
+<div class="flip-container" [class.flipped]="flipped">
+  <div class="flipper">
+    <!-- Front: Login -->
+    <div class="front card shadow p-4">
+      <h3 class="fw-bold text-center mb-3">Login to ITR</h3>
+      <form (submit)="onLoginSubmit($event)">
+        <div class="mb-3">
+          <label for="loginEmail" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="loginEmail" placeholder="Enter email"
+            [(ngModel)]="loginData.email" name="loginEmail" required>
+        </div>
+        <div class="mb-3">
+          <label for="loginPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="loginPassword" placeholder="Password"
+            [(ngModel)]="loginData.password" name="loginPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 fw-semibold">Login</button>
+        <div class="text-center mt-3">
+          <small class="text-success" *ngIf="loginMessage">{{loginMessage}}</small>
+          <small class="text-danger" *ngIf="loginError">{{loginError}}</small>
+          <br>
+          <small>Don't have an account? 
+            <a href="#" (click)="flip($event)" class="text-primary">Register</a>
+          </small>
+        </div>
+      </form>
+    </div>
+    <!-- Back: Register -->
+    <div class="back card shadow p-4">
+      <h3 class="fw-bold text-center mb-3">Register for ITR</h3>
+      <form (submit)="onRegisterSubmit($event)">
+        <div class="mb-3">
+          <label for="registerName" class="form-label">Full Name</label>
+          <input type="text" class="form-control" id="registerName" placeholder="Enter your name"
+            [(ngModel)]="registerData.name" name="registerName" required>
+        </div>
+        <div class="mb-3">
+          <label for="registerEmail" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="registerEmail" placeholder="Enter email"
+            [(ngModel)]="registerData.email" name="registerEmail" required>
+        </div>
+        <div class="mb-3">
+          <label for="registerPassword" class="form-label">Password</label>
+          <input type="password" class="form-control" id="registerPassword" placeholder="Password"
+            [(ngModel)]="registerData.password" name="registerPassword" required>
+        </div>
+        <div class="mb-3">
+          <label for="registerPhone" class="form-label">Phone</label>
+          <input type="text" class="form-control" id="registerPhone" placeholder="Phone"
+            [(ngModel)]="registerData.phone" name="registerPhone" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 fw-semibold">Register</button>
+        <div class="text-center mt-3">
+          <small class="text-success" *ngIf="registerMessage">{{registerMessage}}</small>
+          <small class="text-danger" *ngIf="registerError">{{registerError}}</small>
+          <br>
+          <small>Already have an account? 
+            <a href="#" (click)="flip($event)" class="text-primary">Login</a>
+          </small>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
