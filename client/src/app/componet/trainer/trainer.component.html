@@ -1,0 +1,54 @@
+<p>trainer works!</p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Education</th>
+            <th>Skills</th>
+            <th>Courses</th>
+            <th style="width: 120px;">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let trainer of trainers">
+            <!-- Photo Column -->
+            <td>
+            <img
+                *ngIf="trainer._id"
+                [src]="trainer.photo"
+                alt="Trainer Photo"
+                width="50"
+                height="50"
+                class="rounded-circle shadow-sm"
+                onerror="this.onerror=null; this.style.display='none';"
+            />
+            <i
+                *ngIf="!trainer.photo"
+                class="bi bi-person-circle fs-3 text-muted"
+            ></i>
+            </td>
+    
+            <!-- Name -->
+            <td>{{ trainer.name }}</td>
+    
+            <!-- Education -->
+            <td>{{ trainer.education }}</td>
+    
+            <!-- Skills -->
+            <td>{{ getSkillsDisplay(trainer.skills) }}</td>
+    
+            <!-- Courses -->
+            <td>
+            <span *ngFor="let courseId of trainer.courseIds">
+                {{ getCourseName(courseId) }}<br />
+            </span>
+            </td>
+    
+            <!-- Actions -->
+        
+        </tr>
+        </tbody>
+    </table>
+   

@@ -6,7 +6,7 @@ const courseSchema = new mongoose.Schema({
  image: {
     data: Buffer,
     contentType: String
-  }// store filename or URL
+  }
 });
 
 module.exports = mongoose.model('Course', courseSchema);

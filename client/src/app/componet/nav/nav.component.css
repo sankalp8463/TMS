@@ -1,32 +1,72 @@
-.custom-navbar {
-    background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
-    border-radius: 0 0 18px 18px;
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-  }
-  .custom-navbar .navbar-brand span {
-    letter-spacing: 1px;
-    color: #fff;
-    text-shadow: 1px 1px 4px #0056b3;
-  }
-  .custom-navbar .nav-link {
-    color: #f8f9fa !important;
+.navbar {
+  border-bottom: 1px solid var(--gray-200);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
+.logo-circle {
+  width: 45px;
+  height: 45px;
+  background: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.navbar-brand span {
+  color: var(--gray-800);
+  letter-spacing: -0.5px;
+}
+
+.nav-link {
+  color: var(--gray-600) !important;
+  font-weight: 500;
+  padding: 0.75rem 1rem !important;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary) !important;
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.nav-link.active {
+  color: var(--primary) !important;
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.btn-primary {
+  border-radius: 10px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  border: none;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.btn-outline-primary {
+  border-radius: 10px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navbar-brand span {
     font-size: 1.1rem;
-    margin-right: 10px;
-    transition: color 0.2s, background 0.2s;
-    border-radius: 6px;
   }
-  .custom-navbar .nav-link.active,
-  .custom-navbar .nav-link:hover {
-    background: #fff;
-    color: #007bff !important;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  
+  .logo-circle {
+    width: 40px;
+    height: 40px;
   }
-  .custom-navbar .btn-light {
-    border-radius: 20px;
-    transition: background 0.2s, color 0.2s;
-  }
-  .custom-navbar .btn-light:hover {
-    background: #007bff;
-    color: #fff;
-  }
+}

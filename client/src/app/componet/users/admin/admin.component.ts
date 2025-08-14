@@ -5,12 +5,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CourseComponent } from "./course/course.component";
 import { ManageStudyMaterialComponent } from "./manage-study-material/manage-study-material.component";
+import { ManageTrainerComponent } from "./manage-trainer/manage-trainer.component";
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   standalone:true,
-    imports: [CommonModule, FormsModule, CourseComponent, ManageStudyMaterialComponent],
+    imports: [CommonModule, FormsModule, CourseComponent, ManageStudyMaterialComponent,ManageTrainerComponent],
 
   styleUrls: ['./admin.component.css']
 })

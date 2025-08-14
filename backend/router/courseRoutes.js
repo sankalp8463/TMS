@@ -77,7 +77,7 @@ router.get('/', async (req, res) => {
         imageBase64 = `data:${course.image.contentType};base64,${course.image.data.toString('base64')}`;
       }
       return {
-        _id: course._id,
+        _id: course._id,  
         name: course.name,
         description: course.description,
         imageBase64

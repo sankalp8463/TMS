@@ -9,13 +9,16 @@ import { DashboardComponent } from './componet/dashboard/dashboard.component';
 import { ProfilePopComponent } from './componet/profile-pop/profile-pop.component';
 import { CourseComponent } from './componet/users/admin/course/course.component';
 import { ShowcourseComponent } from './componet/showcourse/showcourse.component';
+import { TrainerComponent } from './componet/trainer/trainer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent,
+    
     ShowcourseComponent,
+         
+
     
 
   
@@ -24,11 +27,13 @@ import { ShowcourseComponent } from './componet/showcourse/showcourse.component'
   ],
   imports: [
     BrowserModule,
+      HomepageComponent,
     AppRoutingModule,
     AuthFlipComponent,
     ProfilePopComponent,
     DashboardComponent,
-    NavComponent
+    NavComponent,
+    TrainerComponent
 ],
   providers: [],
   bootstrap: [AppComponent]

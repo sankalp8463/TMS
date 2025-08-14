@@ -1,0 +1,122 @@
+<div class="trainer-management">
+  <div class="section-header">
+    <h4 class="section-title">
+      <i class="bi bi-person-badge-fill me-2"></i>Trainer Management
+    </h4>
+    <p class="section-subtitle">Add, edit, and manage training instructors</p>
+  </div>
+
+  <!-- Add/Edit Form -->
+  <div class="form-card">
+    <form (ngSubmit)="addOrUpdateTrainer()" class="trainer-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Trainer Name</label>
+          <div class="input-group">
+            <i class="bi bi-person input-icon"></i>
+            <input type="text" class="form-control" placeholder="Enter trainer name"
+                   [(ngModel)]="newTrainer.name" name="name" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Education</label>
+          <div class="input-group">
+            <i class="bi bi-mortarboard input-icon"></i>
+            <input type="text" class="form-control" placeholder="Educational background"
+                   [(ngModel)]="newTrainer.education" name="education">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Skills</label>
+          <div class="input-group">
+            <i class="bi bi-tools input-icon"></i>
+            <input type="text" class="form-control" placeholder="Skills (comma-separated)"
+                   [(ngModel)]="newTrainer.skills" name="skills">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Associated Courses</label>
+          <select multiple class="form-select" [(ngModel)]="newTrainer.courseIds" name="courseIds" required>
+            <option *ngFor="let c of courses" [value]="c._id">{{c.name}}</option>
+          </select>
+          <small class="form-text">Hold Ctrl/Cmd to select multiple courses</small>
+        </div>
+      </div>
+
+      <div class="photo-upload">
+        <label class="form-label">Trainer Photo</label>
+        <div class="upload-area">
+          <input type="file" id="trainerPhoto" class="file-input" (change)="onFileChange($event)">
+          <label for="trainerPhoto" class="upload-label">
+            <div class="upload-content">
+              <i class="bi bi-cloud-upload upload-icon"></i>
+              <span class="upload-text">Click to upload photo</span>
+            </div>
+          </label>
+          <div *ngIf="newTrainer.photo?.data" class="photo-preview">
+            <img [src]="newTrainer.photo?.data" alt="Preview" class="preview-image">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+          <i class="bi" [class.bi-plus-circle]="!editMode" [class.bi-check-circle]="editMode"></i>
+          {{editMode ? 'Update Trainer' : 'Add Trainer'}}
+        </button>
+        <button *ngIf="editMode" type="button" class="btn btn-secondary" (click)="resetForm()">
+          <i class="bi bi-x-circle"></i>Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Success Message -->
+  <div *ngIf="message" class="alert alert-success">
+    <i class="bi bi-check-circle-fill me-2"></i>{{message}}
+  </div>
+
+  <!-- Trainers Grid -->
+  <div class="trainers-grid">
+    <div class="trainer-card" *ngFor="let trainer of trainers">
+      <div class="trainer-photo">
+        <img *ngIf="trainer.photo" [src]="trainer.photo" alt="{{trainer.name}}" class="trainer-image">
+        <div *ngIf="!trainer.photo" class="trainer-placeholder">
+          <i class="bi bi-person-circle"></i>
+        </div>
+      </div>
+      
+      <div class="trainer-info">
+        <h5 class="trainer-name">{{trainer.name}}</h5>
+        <p class="trainer-education">
+          <i class="bi bi-mortarboard me-1"></i>{{trainer.education}}
+        </p>
+        <div class="trainer-skills">
+          <span class="skill-tag" *ngFor="let skill of getSkillsArray(trainer.skills)">
+            {{skill}}
+          </span>
+        </div>
+        <div class="trainer-courses">
+          <small class="courses-label">Courses:</small>
+          <div class="course-list">
+            <span class="course-tag" *ngFor="let courseId of trainer.courseIds">
+              {{getCourseName(courseId)}}
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="trainer-actions">
+        <button class="btn btn-sm btn-outline-primary" (click)="editTrainer(trainer)">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteTrainer(trainer._id)">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

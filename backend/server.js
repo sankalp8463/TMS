@@ -19,7 +19,8 @@ const connectDB = require("./db"); // Correct path assuming db.js is in the same
 
 // Assuming userRoute.js contains your authentication (register, login)
 // and user-related (get users) routes, and is exporting `router`.
-const userRoutes = require("./router/authRoutes"); // Renamed for clarity as it includes auth
+const userRoutes = require("./router/authRoutes");
+const trainerRoutes=require("./router/trainerRoutes.js") // Renamed for clarity as it includes auth
 
 const app = express();
 
@@ -37,8 +38,9 @@ connectDB();
 app.use("/api", userRoutes); // Changed from /api/users to /api to reflect general API routes
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.use('/api/courses', courseRoutes);
+    app.use('/api/courses', courseRoutes);
 app.use('/api/study-materials', studyMaterialRoutes);
+app.use('/api/trainers', trainerRoutes);
 // Basic error handling middleware (optional but recommended)
 app.use((err, req, res, next) => {
     console.error(err.stack);

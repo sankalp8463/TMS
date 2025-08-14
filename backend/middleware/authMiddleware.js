@@ -8,7 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_key_change_this_
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; // Extract token from "Bearer TOKEN"
-
+    //  console.log('Token:', token); // Debugging line to check the token
     if (!token) {
         return res.status(401).json({ message: 'Access Denied: No token provided' });
     }

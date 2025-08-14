@@ -1,118 +1,190 @@
-<div class="container mt-4 admin-panel-bg rounded-4 shadow-lg p-4">
-  <div class="row">
-    <!-- Side Panel for Navigation -->
-    <div class="col-md-3 mb-3 mb-md-0">
-      <div class="sticky-top" style="top: 90px;">
-        <div class="text-center mb-4">
-          <span class="fs-4 fw-bold text-white">Admin Panel</span>
-        </div>
-        <div class="list-group shadow-sm">
-        <button type="button" class="list-group-item list-group-item-action"
-        [class.active]="activeTab === 'manage'" (click)="setActiveTab('manage')">
-  <i class="bi bi-people-fill me-2"></i> Manage Users
-</button>
-<button type="button" class="list-group-item list-group-item-action"
-        [class.active]="activeTab === 'add'" (click)="setActiveTab('add')">
-  <i class="bi bi-person-plus-fill me-2"></i> Add User
-</button>
-<button type="button" class="list-group-item list-group-item-action"
-        [class.active]="activeTab === 'category'" (click)="setActiveTab('category')">
-  <i class="bi bi-tags-fill me-2"></i> Manage Category
-</button>
+<div class="admin-dashboard">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3 col-md-4">
+        <div class="admin-sidebar">
+          <div class="sidebar-header">
+            <div class="admin-avatar">
+              <i class="bi bi-shield-check text-white"></i>
+            </div>
+            <h5 class="sidebar-title">Admin Panel</h5>
+            <p class="sidebar-subtitle">Management Dashboard</p>
+          </div>
+          
+          <nav class="sidebar-nav">
+            <button class="nav-item" [class.active]="activeTab === 'manage'" (click)="setActiveTab('manage')">
+              <i class="bi bi-people-fill"></i>
+              <span>Manage Users</span>
+            </button>
+            <button class="nav-item" [class.active]="activeTab === 'add'" (click)="setActiveTab('add')">
+              <i class="bi bi-person-plus-fill"></i>
+              <span>Add User</span>
+            </button>
+            <button class="nav-item" [class.active]="activeTab === 'category'" (click)="setActiveTab('category')">
+              <i class="bi bi-grid-3x3-gap-fill"></i>
+              <span>Categories</span>
+            </button>
+          </nav>
         </div>
       </div>
-    </div>
-    <!-- Main Content Area -->
-    <div class="col-md-9">
-      <div class="bg-white rounded-4 shadow-sm p-4">
-<!-- course  Tab -->
-<!-- ...inside Main Content Area... -->
-<div *ngIf="activeTab === 'category'">
-  <!-- Sub-tabs for Category Management -->
-  <ul class="nav nav-tabs mb-4">
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="categoryTab === 'course'" (click)="categoryTab = 'course'">Manage Course</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="categoryTab === 'material'" (click)="categoryTab = 'material'">Manage Study Material</a>
-    </li>
-  </ul>
-  <div [ngSwitch]="categoryTab">
-    <app-course *ngSwitchCase="'course'"></app-course>
-    <app-manage-study-material *ngSwitchCase="'material'"></app-manage-study-material>
-  </div>
-</div>
-
-
-
-
-
-
-
-        <!-- Manage Users Tab -->
-      <div *ngIf="activeTab === 'manage'">
-  <h4 class="mb-4 text-primary fw-semibold">Manage Users</h4>
-  <div class="d-flex justify-content-end mb-3">
-    <input type="text" class="form-control w-auto me-2" style="min-width:200px;" placeholder="Search by name or email"
-           [(ngModel)]="searchTerm" (ngModelChange)="filterUsers()" />
-    <button class="btn btn-outline-primary" (click)="filterUsers()">
-      <i class="bi bi-search"></i> Search
-    </button>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover shadow-sm align-middle admin-table">
-      <thead class="table-primary">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Phone</th>
-          <th>Role</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of filteredUsers">
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.phone }}</td>
-          <td>
-            <span [ngClass]="{'badge bg-success': user.role === 'admin', 'badge bg-secondary': user.role !== 'admin'}">
-              {{ user.role | titlecase }}
-            </span>
-          </td>
-          <td>
-            <button *ngIf="user.role !== 'admin'" class="btn btn-sm btn-primary"
-              (click)="promoteToAdmin(user)">Make Admin</button>
-            <span *ngIf="user.role === 'admin'" class="text-success fw-semibold">Admin</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-        <!-- Add User Tab -->
-        <div *ngIf="activeTab === 'add'">
-          <h4 class="mb-4 text-primary fw-semibold">Add User</h4>
-          <form (ngSubmit)="addUser()" #addUserForm="ngForm" class="p-4 border-0 rounded-4 shadow-sm bg-light" style="max-width: 420px;">
-            <div class="mb-3">
-              <label class="form-label text-primary">Name</label>
-              <input type="text" class="form-control" [(ngModel)]="newUser.name" name="name" required>
+      
+      <!-- Main Content -->
+      <div class="col-lg-9 col-md-8">
+        <div class="main-content">
+          
+          <!-- Categories Tab -->
+          <div *ngIf="activeTab === 'category'" class="content-section">
+            <div class="section-header">
+              <h3 class="section-title">Category Management</h3>
+              <p class="section-subtitle">Manage courses, materials, and trainers</p>
             </div>
-            <div class="mb-3">
-              <label class="form-label text-primary">Email</label>
-              <input type="email" class="form-control" [(ngModel)]="newUser.email" name="email" required>
+            
+            <div class="category-tabs">
+              <button class="tab-btn" [class.active]="categoryTab === 'course'" (click)="categoryTab = 'course'">
+                <i class="bi bi-book-fill"></i>Courses
+              </button>
+              <button class="tab-btn" [class.active]="categoryTab === 'material'" (click)="categoryTab = 'material'">
+                <i class="bi bi-file-earmark-text-fill"></i>Materials
+              </button>
+              <button class="tab-btn" [class.active]="categoryTab === 'trainer'" (click)="categoryTab = 'trainer'">
+                <i class="bi bi-person-badge-fill"></i>Trainers
+              </button>
             </div>
-            <div class="mb-3">
-              <label class="form-label text-primary">Phone</label>
-              <input type="text" class="form-control" [(ngModel)]="newUser.phone" name="phone" required>
+            
+            <div class="tab-content">
+              <app-course *ngIf="categoryTab === 'course'"></app-course>
+              <app-manage-study-material *ngIf="categoryTab === 'material'"></app-manage-study-material>
+              <app-manage-trainer *ngIf="categoryTab === 'trainer'"></app-manage-trainer>
             </div>
-            <div class="mb-3">
-              <label class="form-label text-primary">Password</label>
-              <input type="password" class="form-control" [(ngModel)]="newUser.password" name="password" required>
+          </div>
+          
+          <!-- Manage Users Tab -->
+          <div *ngIf="activeTab === 'manage'" class="content-section">
+            <div class="section-header">
+              <h3 class="section-title">User Management</h3>
+              <p class="section-subtitle">View and manage system users</p>
             </div>
-            <button type="submit" class="btn btn-primary w-100 fw-semibold shadow-sm">Add User</button>
-            <div *ngIf="addUserMessage" class="alert alert-info mt-3">{{ addUserMessage }}</div>
-          </form>
+            
+            <div class="search-bar">
+              <div class="search-input-group">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" class="form-control" placeholder="Search users by name or email..."
+                       [(ngModel)]="searchTerm" (ngModelChange)="filterUsers()">
+              </div>
+              <button class="btn btn-primary" (click)="filterUsers()">
+                <i class="bi bi-funnel-fill me-1"></i>Filter
+              </button>
+            </div>
+            
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Contact</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of filteredUsers">
+                    <td>
+                      <div class="user-info">
+                        <div class="user-avatar">
+                          {{user.name?.charAt(0)?.toUpperCase()}}
+                        </div>
+                        <div class="user-details">
+                          <div class="user-name">{{user.name}}</div>
+                          <div class="user-email">{{user.email}}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="contact-info">
+                        <div class="phone">{{user.phone}}</div>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="role-badge" [class.admin]="user.role === 'admin'">
+                        <i class="bi" [class.bi-shield-check]="user.role === 'admin'" 
+                           [class.bi-person]="user.role !== 'admin'"></i>
+                        {{user.role | titlecase}}
+                      </span>
+                    </td>
+                    <td>
+                      <button *ngIf="user.role !== 'admin'" class="btn btn-sm btn-outline-primary"
+                              (click)="promoteToAdmin(user)">
+                        <i class="bi bi-arrow-up-circle me-1"></i>Promote
+                      </button>
+                      <span *ngIf="user.role === 'admin'" class="admin-label">
+                        <i class="bi bi-check-circle-fill me-1"></i>Admin
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Add User Tab -->
+          <div *ngIf="activeTab === 'add'" class="content-section">
+            <div class="section-header">
+              <h3 class="section-title">Add New User</h3>
+              <p class="section-subtitle">Create a new user account</p>
+            </div>
+            
+            <div class="form-container">
+              <form (ngSubmit)="addUser()" #addUserForm="ngForm" class="user-form">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <div class="input-group">
+                      <i class="bi bi-person input-icon"></i>
+                      <input type="text" class="form-control" placeholder="Enter full name"
+                             [(ngModel)]="newUser.name" name="name" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <div class="input-group">
+                      <i class="bi bi-envelope input-icon"></i>
+                      <input type="email" class="form-control" placeholder="Enter email address"
+                             [(ngModel)]="newUser.email" name="email" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <div class="input-group">
+                      <i class="bi bi-telephone input-icon"></i>
+                      <input type="text" class="form-control" placeholder="Enter phone number"
+                             [(ngModel)]="newUser.phone" name="phone" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-group">
+                      <i class="bi bi-lock input-icon"></i>
+                      <input type="password" class="form-control" placeholder="Create password"
+                             [(ngModel)]="newUser.password" name="password" required>
+                    </div>
+                  </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-create">
+                  <i class="bi bi-plus-circle me-2"></i>Create User
+                </button>
+                
+                <div *ngIf="addUserMessage" class="alert alert-success mt-3">
+                  <i class="bi bi-check-circle me-2"></i>{{addUserMessage}}
+                </div>
+              </form>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>
